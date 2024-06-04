@@ -27,7 +27,14 @@ def is_square():
       :returns: True if square (i.e. if equal length and height), False otherwise.
     """
     #### write your solution for this function below here. ####
-
+    # So what I'm getting is that user input can be numbers, but not words. 
+    #(Logically speaking "two" == "two" should work too, but...) I'll convert the numbers to float.
+    area_width = float(input("What's the width of the area in inches? "))
+    area_height = float(input("What's the height of the area in inches? "))
+    if area_width == area_height:
+        return True
+    else:
+        return False
 
 def get_greatest():
     """
@@ -38,6 +45,14 @@ def get_greatest():
     :returns: the greatest of the two input numbers, as an int.
     """
     #### write your solution for this function below here. ####
+    int_1 = int(input("Please enter an integer. "))
+    int_2 = int(input("Please enter another integer. "))
+    if int_1 == int_2:
+        return int_1
+    if int_1 > int_2:
+        return int_1
+    if int_1 < int_2:
+        return int_2
 
 
 def get_bmi_category():
@@ -60,7 +75,26 @@ def get_bmi_category():
       :returns: The name of the BMI statistical category, based on the inputted height and weight.
     """
     #### write your solution for this function below here. ####
-
+    user_height = float(input("Please input your height in inches. "))
+    user_weight = float(input("Please input your weight in pounds. "))
+    user_bmi = 703*user_weight/ user_height**2
+    # A bit curious on whether I should capitalize the BMI category or not, but I ended up capitalizing for style.
+    if user_bmi < 15:
+        return "Very severely underweight"
+    elif 15 <= user_bmi < 16:
+        return "Severely underweight"
+    elif  16 <= user_bmi < 18.5:
+        return "Underweight"
+    elif 18.5 <= user_bmi < 25:
+        return "Normal"
+    elif 25 <= user_bmi < 30:
+        return "Overweight"
+    elif 30 <= user_bmi < 35:
+        return "Moderately obese"
+    elif 35 <= user_bmi < 40:
+        return "Severely obese"
+    elif user_bmi >= 40:
+        return "Very severely obese"
 
 def get_discount():
     """
@@ -72,7 +106,20 @@ def get_discount():
       :returns: The cost of the masks, after any discounts, e.g. "$4,000" for 1000 masks.
     """
     #### write your solution for this function below here. ####
-
+    desired_mask_numb = int(input("How many masks would you like? "))
+    # No way the total cost could be a float, since the cost of a mask is $5, unless the customer bought half a mask. But under 
+    # assumption that the price can be changed, I'll round both costs.
+    cost_before_discount = round(desired_mask_numb*5)
+    cost_after_discount = round(cost_before_discount*0.8)
+    # .format() converts to string, so I guess formatting must be performed in the if statement, 
+    # unless I make two more seperate variables
+    # UPDATE: on second thought: two variables is good, otherwise it looks super messy.
+    pre_discount_cost_formatted = format(cost_before_discount, ',')
+    post_discount_cost_formatted = format(cost_after_discount, ',')
+    if cost_before_discount < 5000:
+        return f"${pre_discount_cost_formatted}"
+    if cost_before_discount >= 5000:
+        return f"${post_discount_cost_formatted}"
 
 def is_leap_year():
     """
@@ -85,3 +132,12 @@ def is_leap_year():
         get_year()
     )  # this line is given to you - the variable, year, holds the current year
     #### write your solution for this function below here. ####
+    # Check for century year
+    if year % 100 == 0:
+        if year % 400 == 0:
+            return True
+    # Not century year
+    elif year % 4 == 0:
+        return True
+    else:
+        return False
